@@ -13,7 +13,8 @@
   import Categories from '../components/categories'
   import Counter from '../components/counter'
 
-  const storageCount = window.localStorage['count']
+  const storageCount = window.localStorage.count
+
   const count = !isNaN(storageCount)
     ? parseInt(storageCount, 10)
     : 0
@@ -29,12 +30,12 @@
         // count can not go below 0
         const count = Math.max(0, this.get('count') + payload)
         this.set({ count })
-        window.localStorage['count'] = count
+        window.localStorage.count = count
       },
 
       resetCount() {
         this.set({ count: 0 })
-        window.localStorage['count'] = 0
+        window.localStorage.count = 0
       },
     },
 
