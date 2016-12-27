@@ -1,10 +1,13 @@
 <p>Select a category:</p>
 
-<ul>
+<ul class='list'>
 {{#each categories as category}}
-  <li>
-    <button on:click='select(category)'>
+  <li class='list__item'>
+    <button class='select' on:click='fire("select", { category })'>
       select {{ category }}
+    </button>
+    <button class='delete' on:click='fire("removeCategory", { category })'>
+      X
     </button>
   </li>
 {{/each}}
@@ -14,26 +17,48 @@
   selected Category: {{ category }}
 </p>
 
+<form on:submit='submit(event)'>
+  <fieldset>
+    <legend>Add a new Category</legend>
+    <input type='text' placeholder='Category name' />
+    <input type='submit' value='Submit' />
+  </fieldset>
+</form>
+
 <script>
   export default {
-    data:
-      () => ({
-        category: 'none',
-        categories: [
-          'animal',
-          'vegetable',
-          'mineral',
-        ],
-      }),
-
     methods: {
-      select(category) {
-        const categories = this.get('categories')
+      submit(event) {
+        event.preventDefault()
 
-        if (categories.indexOf(category) > -1) {
-          this.set({ category })
-        }
-      }
-    }
+        // get category input value
+        const category = event.target[1].value
+        // reset category input value
+        event.target[1].value = ''
+
+        this.fire('addCategory', { category })
+
+        return false
+      },
+    },
   }
 </script>
+
+<style>
+  .list {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .list__item {
+    display: flex;
+  }
+
+  .select {
+    width: 80%;
+  }
+  .delete {
+    width: 20%;
+    background-color: rgb(255, 0, 0);
+  }
+</style>

@@ -1,12 +1,65 @@
 <div>
   <h1>Categories:</h1>
-  <Categories />
+  <Categories
+    categories='{{ categories }}'
+    category='{{ category }}'
+    on:select='select(event)'
+    on:addCategory='addCategory(event)'
+    on:removeCategory='removeCategory(event)'
+  />
 </div>
 
 <script>
   import Categories from '../components/categories'
 
+  let { category, categories } = window.localStorage
+
+  category = category
+    ? category
+    : 'none'
+
+  categories = categories
+    ? JSON.parse(categories)
+    : []
+
   export default {
+    data:
+      () => ({
+        category,
+        categories,
+      }),
+
+    methods: {
+      select({ category }) {
+        const categories = this.get('categories')
+
+        if (categories.indexOf(category) > -1) {
+          this.set({ category })
+          window.localStorage.category = category
+        }
+      },
+
+      addCategory({ category }) {
+        if (category) {
+          const categories = this.get('categories')
+          if (categories.indexOf(category) < 0) {
+            categories.push(category)
+            this.set({ categories })
+            window.localStorage.categories = JSON.stringify(categories)
+          }
+        }
+      },
+      removeCategory({ category }) {
+        const categories = this.get('categories')
+        const categoryIndex = categories.indexOf(category)
+        if (categoryIndex > -1) {
+          categories.splice(categoryIndex, 1)
+        }
+        this.set({ categories })
+        window.localStorage.categories = JSON.stringify(categories)
+      }
+    },
+
     components: {
       Categories,
     },
