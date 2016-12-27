@@ -1,18 +1,23 @@
 <div class='app'>
-  <Header dude='walt' />
+  <Header menu='{{ menu }}' on:navigate='navigate(event)' />
 
-  <Counter
-    bind:count
-    on:count='count( event.payload )'
-    on:resetCount='resetCount()'
-  />
+  <div>Route: {{ route }}</div>
 
-  <Categories />
+  {{#if route === '/'}}
+    <IndexPage />
+  {{/if}}
+
+  {{#if route === '/timer'}}
+    <TimerPage />
+  {{/if}}
+
+  {{#if route === '/categories'}}
+    <CategoriesPage />
+  {{/if}}
 </div>
 
 <style>
   .app {
-    font-size: 22px;
     height: 100vh;
     width: 100vw;
     display: flex;
@@ -22,31 +27,48 @@
 
 <script>
   import Header from './components/header'
-  import Categories from './components/categories'
-  import Counter from './components/counter'
+  import IndexPage from './pages/home'
+  import TimerPage from './pages/timer'
+  import CategoriesPage from './pages/categories'
 
   export default {
     data:
       () => ({
         count: 0,
+        route: window.location.pathname || '/',
+        menu: [
+          { href: '/', text: 'home' },
+          { href: '/timer', text: 'timer' },
+          { href: '/categories', text: 'categories' },
+        ],
       }),
 
     methods: {
-      count(payload) {
-        // count can not go below 0
-        const count = Math.max(0, this.get('count') + payload)
-        this.set({ count })
-      },
+      navigate({ href }) {
+        const { host, protocol } = window.location
+        const route = href.replace(`${ protocol }//${ host }`, '')
 
-      resetCount() {
-        this.set({ count: 0 })
+        history.pushState(null, null, href )
+        this.set({ route })
       },
+    },
+
+    onrender() {
+      window.addEventListener('popstate', () => {
+        // this.set({ time: new Date() });
+        console.log('popstate')
+      })
+    },
+
+    onteardown() {
+      window.removeEventListener('popstate')
     },
 
     components: {
       Header,
-      Counter,
-      Categories,
+      IndexPage,
+      TimerPage,
+      CategoriesPage,
     },
   }
 </script>

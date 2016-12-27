@@ -1,0 +1,107 @@
+<div>
+  <h1>Timer:</h1>
+  <p>
+    <span>The time is</span>
+    <span>{{hours}}:{{minutes}}:{{seconds}}</span>
+  </p>
+  <p>
+    <span>Today is: </span>
+    <span>{{ day }}, {{ month }} {{ date }} {{ year }}</span>
+  </p>
+</div>
+
+<script>
+  const months = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
+  ]
+
+  const days = [
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thursday',
+    'Friday',
+    'Saturday',
+    'Sunday',
+  ]
+
+  export default {
+    onrender () {
+      this.interval = setInterval( () => {
+        this.set({ time: new Date() })
+      }, 1000 )
+    },
+
+    onteardown () {
+      clearInterval( this.interval )
+    },
+
+    data:
+      () => ({
+        time: new Date()
+      }),
+
+    computed: {
+      hours: time => {
+        const hours = time.getHours()
+        return hours < 10
+          ? '0' + hours
+          : hours
+      },
+      minutes: time => {
+        const minutes = time.getMinutes()
+        return minutes < 10
+          ? '0' + minutes
+          : minutes
+      },
+      seconds: time => {
+        const seconds = time.getSeconds()
+        return seconds < 10
+          ? '0' + seconds
+          : seconds
+      },
+      day: time => {
+        return days[time.getDay() - 1]
+      },
+      date: time => {
+        let date = time.getDate()
+        const modulo = date % 10
+
+        if (date >= 11 && date <= 13) {
+          date = date + 'th'
+        }
+        else if (modulo === 1) {
+          date = date + 'st'
+        }
+        else if (modulo === 2) {
+          date = date + 'nd'
+        }
+        else if (modulo === 3) {
+          date = date + 'rd'
+        }
+        else {
+          date = date + 'th'
+        }
+
+        return date
+      },
+      month: time => {
+        return months[time.getMonth()]
+      },
+      year: time => {
+        return time.getFullYear()
+      },
+    },
+  }
+</script>

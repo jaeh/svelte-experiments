@@ -2,7 +2,7 @@
   <p>Count: {{count}}</p>
   <p>
     <button on:click='fire("count", { payload: 1 })'>+1</button>
-    <button on:click='fire("count", { payload: -1 })'>-1</button>
+    <button disabled='{{ count === 0 }}' on:click='fire("count", { payload: -1 })'>-1</button>
   </p>
 
   <p>
