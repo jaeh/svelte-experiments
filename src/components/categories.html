@@ -1,0 +1,39 @@
+<p>Select a category:</p>
+
+<ul>
+{{#each categories as category}}
+  <li>
+    <button on:click='select(category)'>
+      select {{ category }}
+    </button>
+  </li>
+{{/each}}
+</ul>
+
+<p>
+  selected Category: {{ category }}
+</p>
+
+<script>
+  export default {
+    data:
+      () => ({
+        category: 'none',
+        categories: [
+          'animal',
+          'vegetable',
+          'mineral',
+        ],
+      }),
+
+    methods: {
+      select(category) {
+        const categories = this.get('categories')
+
+        if (categories.indexOf(category) > -1) {
+          this.set({ category })
+        }
+      }
+    }
+  }
+</script>

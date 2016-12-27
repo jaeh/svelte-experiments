@@ -1,0 +1,30 @@
+<h1>Logo</h1>
+
+<h3>{{ salutation }}</h3>
+
+<Menu />
+
+<script>
+  import Menu from './menu/menu.html'
+
+  import { hello } from '../helpers'
+
+  export default {
+    data() {
+      return {
+        dude: 'Unknown',
+        count: 0
+      }
+    },
+
+    computed: {
+      salutation:
+        dude =>
+          hello(dude),
+    },
+
+    components: {
+      Menu,
+    }
+  }
+</script>
