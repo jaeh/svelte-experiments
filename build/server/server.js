@@ -22,6 +22,10 @@ else {
   app.use(express.static(path.join(process.cwd(), 'bundle')))
 }
 
+app.use('*', (req, res) => {
+  res.sendFile(path.join(process.cwd(), 'public', 'index.html'))
+})
+
 app.listen(
   PORT,
   err =>
