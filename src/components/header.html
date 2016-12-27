@@ -44,7 +44,7 @@
     border-bottom-right-radius: .5rem;
     border-style: solid;
     border-color: rgb(255, 152, 0);
-    padding: .5rem;
+    padding: 0 .5rem .5rem;
   }
 
   .list {
@@ -52,17 +52,34 @@
     justify-content: space-between;
   }
   .list__item {
-    padding: 0 .5rem 0 0;
+    padding: .4rem .5rem 0 0;
+    border-width: 0px;
+    border-top-width: 2px;
+    border-style: solid;
+    border-color: rgb(255, 152, 0);
+    transition: border-color 500ms;
+  }
+
+  .list__item a {
+    padding: .5rem 0 0 0;
+    text-decoration: none;
+  }
+
+  .list__item.active {
+    border-top: 2px solid rgb(230, 81, 0);
   }
 
   .list__item.active a {
     color: rgb(230, 81, 0);
   }
 
+  .logo {
+    margin: .5rem .5rem 0 0;
+  }
+
   .logo svg {
     height: 2rem;
     width: 2rem;
     fill: rgb(255, 152, 0);
-    margin: 0 .5rem 0 0;
   }
 </style>
