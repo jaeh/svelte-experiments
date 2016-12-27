@@ -9,7 +9,7 @@
   <nav>
     <ul class='list'>
       {{#each menu as item}}
-        <li class='list__item'>
+        <li class='list__item {{ route === item.href ? "active" : "" }}'>
           <Link
             on:navigate='fire("navigate", event)'
             href='{{ item.href }}'
@@ -46,12 +46,17 @@
     border-color: rgb(255, 152, 0);
     padding: .5rem;
   }
+
   .list {
     display: flex;
     justify-content: space-between;
   }
   .list__item {
     padding: 0 .5rem 0 0;
+  }
+
+  .list__item.active a {
+    color: rgb(230, 81, 0);
   }
 
   .logo svg {
