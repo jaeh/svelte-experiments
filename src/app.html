@@ -1,19 +1,17 @@
 <div class='app'>
-  <Header menu='{{ menu }}' on:navigate='navigate(event)' />
+  <Header menu='{{ menu }}' route='{{ route }}' on:navigate='navigate(event)' />
 
   <article class='page'>
     <div>Route: {{ route }}</div>
 
     {{#if route === '/'}}
       <IndexPage />
-    {{/if}}
-
-    {{#if route === '/timer'}}
+    {{elseif route === '/timer'}}
       <TimerPage />
-    {{/if}}
-
-    {{#if route === '/categories'}}
+    {{elseif route === '/categories'}}
       <CategoriesPage />
+    {{elseif route === '/counter'}}
+      <CounterPage />
     {{/if}}
   </article>
 </div>
@@ -37,6 +35,7 @@
   import IndexPage from './pages/home'
   import TimerPage from './pages/timer'
   import CategoriesPage from './pages/categories'
+  import CounterPage from './pages/counter'
 
   export default {
     data:
@@ -47,6 +46,7 @@
           { href: '/', text: 'home' },
           { href: '/timer', text: 'timer' },
           { href: '/categories', text: 'categories' },
+          { href: '/counter', text: 'counter' },
         ],
       }),
 
@@ -60,22 +60,12 @@
       },
     },
 
-    onrender() {
-      window.addEventListener('popstate', () => {
-        // this.set({ time: new Date() });
-        console.log('popstate')
-      })
-    },
-
-    onteardown() {
-      window.removeEventListener('popstate')
-    },
-
     components: {
       Header,
       IndexPage,
       TimerPage,
       CategoriesPage,
+      CounterPage,
     },
   }
 </script>

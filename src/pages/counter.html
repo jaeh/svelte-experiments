@@ -1,0 +1,39 @@
+<div>
+  <h1>Counter:</h1>
+
+  <Counter
+    bind:count
+    on:count='count(event.payload)'
+    on:resetCount='resetCount()'
+  />
+</div>
+
+
+<script>
+  import Categories from '../components/categories'
+  import Counter from '../components/counter'
+
+  export default {
+    data:
+      () => ({
+        count: 0,
+      }),
+
+    methods: {
+      count(payload) {
+        // count can not go below 0
+        const count = Math.max(0, this.get('count') + payload)
+        this.set({ count })
+      },
+
+      resetCount() {
+        this.set({ count: 0 })
+      },
+    },
+
+    components: {
+      Counter,
+      Categories,
+    },
+  }
+</script>

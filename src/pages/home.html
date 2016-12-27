@@ -1,39 +1,9 @@
 <div>
-  <h1>Counter:</h1>
+  <h1>Home:</h1>
 
-  <Counter
-    bind:count
-    on:count='count(event.payload)'
-    on:resetCount='resetCount()'
-  />
+  <div>
+    This svelte application contains some example components.
+    It is a playground of sorts that i created whilst going through the examples
+    on <a href="https://svelte.technology" target="utopia">svelte.technology</a>
+  </div>
 </div>
-
-
-<script>
-  import Categories from '../components/categories'
-  import Counter from '../components/counter'
-
-  export default {
-    data:
-      () => ({
-        count: 0,
-      }),
-
-    methods: {
-      count(payload) {
-        // count can not go below 0
-        const count = Math.max(0, this.get('count') + payload)
-        this.set({ count })
-      },
-
-      resetCount() {
-        this.set({ count: 0 })
-      },
-    },
-
-    components: {
-      Counter,
-      Categories,
-    },
-  }
-</script>
