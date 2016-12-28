@@ -19,6 +19,7 @@
       {{/each}}
     </ul>
   </nav>
+  <span class='route__info'>Route: {{ route }}</span>
 </header>
 
 <script>
@@ -33,7 +34,7 @@
 
 <style>
   .header {
-    width: 100%;
+    width: 90vw;
     display: flex;
     position: fixed;
     background-color: #ffffff;
@@ -84,5 +85,12 @@
   }
   .logo.active svg {
     fill: rgb(230, 81, 0);
+  }
+
+  .route__info {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+    justify-content: flex-end;
   }
 </style>
