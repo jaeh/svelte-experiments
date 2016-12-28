@@ -1,16 +1,11 @@
-<div class='counter'>
-  <p>Count: {{count}}</p>
-  <p>
-    <button on:click='fire("count", { payload: 1 })'>+1</button>
-    {{#if count > 0}}
-      <button on:click='fire("count", { payload: -1 })'>-1</button>
-    {{/if}}
-  </p>
+<div>Count: {{count}}</div>
 
-  <p>
-    <button id="reset-counter" on:click='fire("resetCount")'>Reset Counter</button>
-  </p>
-</div>
+<button on:click='fire("count", { payload: 1 })'>+1</button>
+{{#if count > 0}}
+  <button on:click='fire("count", { payload: -1 })'>-1</button>
+{{/if}}
+
+<button id="reset-counter" on:click='fire("resetCount")'>Reset Counter</button>
 
 <style>
   .counter {
