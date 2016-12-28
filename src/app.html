@@ -2,16 +2,14 @@
   <Header menu='{{ menu }}' route='{{ route }}' on:navigate='navigate(event)' />
 
   <article class='page'>
-    <div>Route: {{ route }}</div>
-
-    {{#if route === '/'}}
-      <IndexPage />
-    {{elseif route === '/timer'}}
+    {{#if route === '/timer'}}
       <TimerPage />
     {{elseif route === '/categories'}}
       <CategoriesPage />
     {{elseif route === '/counter'}}
       <CounterPage />
+    {{else}}
+      <IndexPage />
     {{/if}}
   </article>
 
