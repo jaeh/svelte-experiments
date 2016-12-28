@@ -1,4 +1,4 @@
-<div>
+<section>
   <h1>Categories:</h1>
   <Categories
     categories='{{ categories }}'
@@ -7,10 +7,14 @@
     on:addCategory='addCategory(event)'
     on:removeCategory='removeCategory(event)'
   />
-</div>
+
+  <AddCategoryForm on:addCategory='addCategory(event)' />
+
+</section>
 
 <script>
   import Categories from '../components/categories'
+  import AddCategoryForm from '../components/add-category-form'
 
   let { category, categories } = window.localStorage
 
@@ -49,6 +53,7 @@
           }
         }
       },
+
       removeCategory({ category }) {
         const categories = this.get('categories')
         const categoryIndex = categories.indexOf(category)
@@ -62,6 +67,7 @@
 
     components: {
       Categories,
+      AddCategoryForm,
     },
   }
 </script>

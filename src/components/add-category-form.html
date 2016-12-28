@@ -1,0 +1,26 @@
+<form on:submit='submit(event)'>
+  <fieldset>
+    <legend><h3>Add a new Category</h3></legend>
+    <input type='text' placeholder='Category name' />
+    <input type='submit' value='Submit' />
+  </fieldset>
+</form>
+
+<script>
+  export default {
+    methods: {
+      submit(event) {
+        event.preventDefault()
+
+        // get category input value
+        const category = event.target[1].value
+        // reset category input value
+        event.target[1].value = ''
+
+        this.fire('addCategory', { category })
+
+        return false
+      },
+    },
+  }
+</script>

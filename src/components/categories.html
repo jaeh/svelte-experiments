@@ -1,48 +1,19 @@
-<p>Select a category:</p>
+<h5>
+  selected Category: {{ category }}
+</h5>
 
 <ul class='list'>
-{{#each categories as category}}
-  <li class='list__item'>
-    <button class='select' on:click='fire("select", { category })'>
-      select {{ category }}
-    </button>
-    <button class='delete' on:click='fire("removeCategory", { category })'>
-      X
-    </button>
-  </li>
-{{/each}}
+  {{#each categories as category}}
+    <li class='list__item'>
+      <button class='select' on:click='fire("select", { category })'>
+        select {{ category }}
+      </button>
+      <button class='delete' on:click='fire("removeCategory", { category })'>
+        X
+      </button>
+    </li>
+  {{/each}}
 </ul>
-
-<p>
-  selected Category: {{ category }}
-</p>
-
-<form on:submit='submit(event)'>
-  <fieldset>
-    <legend>Add a new Category</legend>
-    <input type='text' placeholder='Category name' />
-    <input type='submit' value='Submit' />
-  </fieldset>
-</form>
-
-<script>
-  export default {
-    methods: {
-      submit(event) {
-        event.preventDefault()
-
-        // get category input value
-        const category = event.target[1].value
-        // reset category input value
-        event.target[1].value = ''
-
-        this.fire('addCategory', { category })
-
-        return false
-      },
-    },
-  }
-</script>
 
 <style>
   .list {
